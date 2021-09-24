@@ -1,6 +1,6 @@
 name: Build & Push Image Pipeline with Docker
 
-on: [push]
+on: workflow_dispatch
 
 jobs:
   docker:
@@ -27,5 +27,5 @@ jobs:
         with:
           push: true
           context: ${{ env.working-directory }}
-          tags: -v * |
+          tags: -v* |
            ghcr.io/orhan92/simplewebhalloworld:latest
