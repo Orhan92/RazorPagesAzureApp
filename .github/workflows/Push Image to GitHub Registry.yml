@@ -29,4 +29,4 @@ jobs:
           context: ${{ env.working-directory }}
           tags: |
            ghcr.io/orhan92/simplewebhalloworld:latest
-           - v*
+           ghcr.io/orhan92/simplewebhalloworld:${{ github.run_number }}
