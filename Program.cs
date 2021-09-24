@@ -22,5 +22,5 @@ namespace CosmosWebApp
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-    }//hej
+    }
 }
