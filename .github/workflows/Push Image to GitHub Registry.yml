@@ -3,7 +3,7 @@ name: Build & Push Image Pipeline with Docker
 on: workflow_dispatch
 
 jobs:
-  docker:
+  Docker-build-or-push-to-Registry:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,5 +28,5 @@ jobs:
           push: true
           context: ${{ env.working-directory }}
           tags: |
-           ghcr.io/orhan92/simplewebhalloworld:latest
-           ghcr.io/orhan92/simplewebhalloworld:${{ github.run_number }}
+           ghcr.io/orhan92/azuremusicapp:latest
+           ghcr.io/orhan92/azuremusicapp:${{ github.run_number }}
