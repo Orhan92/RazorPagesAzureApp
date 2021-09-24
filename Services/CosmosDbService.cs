@@ -6,7 +6,6 @@ using Microsoft.Azure.Cosmos;
 
 namespace CosmosWebApp.Services
 {
-
     public class CosmosDbService : ICosmosDbService
     {
         private Container _container;
@@ -33,7 +32,6 @@ namespace CosmosWebApp.Services
 
                 results.AddRange(response.ToList());
             }
-
             return results;
         }
 
@@ -53,9 +51,7 @@ namespace CosmosWebApp.Services
         //    {
         //        return null;
         //    }
-
         //}
-
 
         //public async Task UpdateItemAsync(string id, Song song)
         //{
