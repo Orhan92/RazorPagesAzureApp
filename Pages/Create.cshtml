@@ -1,0 +1,20 @@
+﻿@page
+@model CreateModel
+@{
+    ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="display-4" style="text-align: center">Create a new Song</h2>
+
+<div class="w-50 align-items-center">
+    <form method="post" class="align-items-center" style="align-content: center">
+        @Html.LabelFor(a => a.Music.Artist)
+        <input asp-for="Music.Artist" required class="form-control">
+        <br />
+        @Html.LabelFor(a => a.Music.Title)
+        <input asp-for="Music.Title" required class="form-control">
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

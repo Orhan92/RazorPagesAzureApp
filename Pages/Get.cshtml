@@ -1,0 +1,49 @@
+﻿@page
+@model GetModel
+@{
+    ViewBag.Title = "List of Songs";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Songs inside the Database</h1>
+
+    <div style="height:600px;overflow-y:scroll">
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    Id
+                </th>
+                <th>
+                    Artist
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Created
+                </th>
+            </tr>
+
+            @foreach (var song in Model.Song)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => song.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => song.Artist)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => song.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => song.Created)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-offset-2 col-md-10" asp-page="/Index">
+        <button type="submit" class="btn btn-dark" href="/Index">Home</button>
+    </div>
+</div>
