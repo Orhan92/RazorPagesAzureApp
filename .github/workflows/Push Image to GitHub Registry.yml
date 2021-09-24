@@ -27,5 +27,6 @@ jobs:
         with:
           push: true
           context: ${{ env.working-directory }}
-          tags: -v* |
+          tags: |
            ghcr.io/orhan92/simplewebhalloworld:latest
+           - v*
