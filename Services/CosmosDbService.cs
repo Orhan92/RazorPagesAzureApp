@@ -6,7 +6,6 @@ using Microsoft.Azure.Cosmos;
 
 namespace CosmosWebApp.Services
 {
-
     public class CosmosDbService : ICosmosDbService
     {
         private Container _container;
@@ -33,33 +32,30 @@ namespace CosmosWebApp.Services
 
                 results.AddRange(response.ToList());
             }
-
             return results;
         }
 
         //public async Task DeleteItemAsync(string id)
         //{
-        //    await this._container.DeleteItemAsync<Item>(id, new PartitionKey(id));
+        //    await this._container.DeleteItemAsync<Song>(id, new PartitionKey(id));
         //}
 
-        //public async Task<Item> GetItemAsync(string id)
+        //public async Task<Song> GetItemAsync(string id)
         //{
         //    try
         //    {
-        //        ItemResponse<Item> response = await this._container.ReadItemAsync<Item>(id, new PartitionKey(id));
+        //        ItemResponse<Song> response = await this._container.ReadItemAsync<Item>(id, new PartitionKey(id));
         //        return response.Resource;
         //    }
         //    catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
         //    {
         //        return null;
         //    }
-
         //}
 
-
-        //public async Task UpdateItemAsync(string id, Item item)
+        //public async Task UpdateItemAsync(string id, Song song)
         //{
-        //    await this._container.UpsertItemAsync<Item>(item, new PartitionKey(id));
+        //    await this._container.UpsertItemAsync<Song>(song, new PartitionKey(id));
         //}
     }
 }
