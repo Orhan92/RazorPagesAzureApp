@@ -7,31 +7,37 @@ using CosmosWebApp.Models;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace CosmosWebApp.Pages
 {
     public class CreateModel : PageModel
     {
         private readonly ICosmosDbService _cosmosDbService;
-        private TelemetryClient _aiClient;
-        public CreateModel(ICosmosDbService cosmosDbService)
+        private readonly ILogger _logger;
+        public CreateModel(ICosmosDbService cosmosDbService, ILogger<IActionResult> logger)
         {
             _cosmosDbService = cosmosDbService;
-        }
-        public CreateModel(TelemetryClient aiClient)
-        {
-            _aiClient = aiClient;
+            _logger = logger;
         }
 
         [BindProperty]
         public Song Music { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            Music.Id = Guid.NewGuid().ToString();
-            Music.Created = DateTime.Now;
-            await _cosmosDbService.AddItemAsync(Music);
-            _aiClient.TrackEvent("AddedSong");
-            return RedirectToPage("/Index");
+            try
+            {
+                Music.Id = Guid.NewGuid().ToString();
+                Music.Created = DateTime.Now;
+                await _cosmosDbService.AddItemAsync(Music);
+                _logger.LogInformation($"New song added: {Music.Artist} - {Music.Title}");
+                return RedirectToPage("/Index");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message.ToString());
+                return RedirectToPage("/Index");
+            }
 
         }
     }
