@@ -14,10 +14,11 @@ namespace CosmosWebApp.Pages
     public class CreateModel : PageModel
     {
         private readonly ICosmosDbService _cosmosDbService;
-        private readonly ILogger _logger;
-        public CreateModel(ICosmosDbService cosmosDbService)
+        private readonly ILogger<CreateModel> _logger;
+        public CreateModel(ICosmosDbService cosmosDbService, ILogger<CreateModel> logger)
         {
             _cosmosDbService = cosmosDbService;
+            _logger = logger;
         }
 
         [BindProperty]
@@ -29,14 +30,14 @@ namespace CosmosWebApp.Pages
                 Music.Id = Guid.NewGuid().ToString();
                 Music.Created = DateTime.Now;
                 await _cosmosDbService.AddItemAsync(Music);
+                _logger.LogInformation($"Added Song: {Music.Artist} - {Music.Title} | Created: {Music.Created}");
                 return RedirectToPage("/Index");
-            }
+        }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message.ToString());
+                _logger.LogError(ex, "Exception caught!");
                 return RedirectToPage("/Index");
             }
-
-        }
+}
     }
 }
