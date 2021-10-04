@@ -15,10 +15,9 @@ namespace CosmosWebApp.Pages
     {
         private readonly ICosmosDbService _cosmosDbService;
         private readonly ILogger _logger;
-        public CreateModel(ICosmosDbService cosmosDbService, ILogger<IActionResult> logger)
+        public CreateModel(ICosmosDbService cosmosDbService)
         {
             _cosmosDbService = cosmosDbService;
-            _logger = logger;
         }
 
         [BindProperty]
@@ -30,7 +29,6 @@ namespace CosmosWebApp.Pages
                 Music.Id = Guid.NewGuid().ToString();
                 Music.Created = DateTime.Now;
                 await _cosmosDbService.AddItemAsync(Music);
-                _logger.LogInformation($"New song added: {Music.Artist} - {Music.Title}");
                 return RedirectToPage("/Index");
             }
             catch (Exception ex)
