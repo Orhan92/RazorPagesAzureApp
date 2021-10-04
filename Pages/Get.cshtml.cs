@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Documents.Linq;
+using Microsoft.Extensions.Logging;
 using RestSharp;
 
 namespace CosmosWebApp.Pages
@@ -14,8 +15,10 @@ namespace CosmosWebApp.Pages
     public class GetModel : PageModel
     {
         private readonly ICosmosDbService _cosmosDbService;
-        public GetModel(ICosmosDbService cosmosDbService)
+        private readonly ILogger<GetModel> _logger;
+        public GetModel(ICosmosDbService cosmosDbService, ILogger<GetModel> logger)
         {
+            _logger = logger;
             _cosmosDbService = cosmosDbService;
         }
 
@@ -24,15 +27,22 @@ namespace CosmosWebApp.Pages
 
         public async Task<IActionResult> OnGet()
         {
-
-            var result = await _cosmosDbService.GetItemsAsync("SELECT c.id, c.artist, c.title, c.timeCreated FROM c ORDER BY c.artist");
-
-            foreach (var x in result)
+            try
             {
-                Song.Add(x);
-            }
+                var result = await _cosmosDbService.GetItemsAsync("SELECT c.id, c.artist, c.title, c.timeCreated FROM c ORDER BY c.artist");
 
-            return Page();
+                foreach (var x in result)
+                {
+                    Song.Add(x);
+                }
+                _logger.LogInformation("Viewing all songs in archive success!");
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Exception executed!");
+                return RedirectToPage("/Index");
+            }
         }
     }
 }
