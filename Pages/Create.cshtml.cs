@@ -21,12 +21,9 @@ namespace CosmosWebApp.Pages
         public Song Music { get; set; }
         public async Task <IActionResult> OnPostAsync()
         {
-            if (Music.Artist != null  || Music.Title != null)
-            {
                 Music.Id = Guid.NewGuid().ToString();
                 Music.Created = DateTime.Now;
                 await _cosmosDbService.AddItemAsync(Music);           
-            }
                 return RedirectToPage("/Index");         
         }
     }
