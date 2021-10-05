@@ -35,7 +35,7 @@ namespace CosmosWebApp.Pages
                 {
                     Song.Add(x);
                 }
-                _logger.LogInformation("Viewing all songs in archive success!");
+                _logger.LogInformation("SHOWING ALL SONGS IN ARCHIVE");
                 return Page();
             }
             catch (Exception ex)

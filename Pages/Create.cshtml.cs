@@ -30,7 +30,7 @@ namespace CosmosWebApp.Pages
                 Music.Id = Guid.NewGuid().ToString();
                 Music.Created = DateTime.Now;
                 await _cosmosDbService.AddItemAsync(Music);
-                _logger.LogInformation($"Added Song: {Music.Artist} - {Music.Title} | Created: {Music.Created}");
+                _logger.LogInformation($"SONG ADDED: {Music.Artist} - {Music.Title} | CREATED: {Music.Created}");
                 return RedirectToPage("/Index");
         }
             catch (Exception ex)
