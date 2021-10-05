@@ -1,14 +1,10 @@
 using CosmosWebApp.Services;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Serilog;
 using System.Threading.Tasks;
 
 namespace CosmosWebApp
@@ -28,6 +24,7 @@ namespace CosmosWebApp
         {
             services.AddRazorPages();
             services.AddSingleton<ICosmosDbService>(InitializeCosmosClientInstanceAsync(Configuration.GetSection("CosmosDb")).GetAwaiter().GetResult());
+            services.AddSingleton(Log.Logger);
             services.AddApplicationInsightsTelemetry("InstrumentationKey");
         }
 

@@ -20,7 +20,7 @@ namespace CosmosWebApp
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.ApplicationInsights(new TelemetryConfiguration { InstrumentationKey = "b1973287-1808-4447-9bf2-9b3a54562a45" },TelemetryConverter.Traces )
+                .WriteTo.ApplicationInsights(new TelemetryConfiguration { InstrumentationKey = "b1973287-1808-4447-9bf2-9b3a54562a45" }, TelemetryConverter.Traces)
                 .CreateLogger();
 
             try
