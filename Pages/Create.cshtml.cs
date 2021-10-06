@@ -32,12 +32,12 @@ namespace CosmosWebApp.Pages
                 await _cosmosDbService.AddItemAsync(Music);
                 _logger.LogInformation($"SONG ADDED: {Music.Artist} - {Music.Title} | CREATED: {Music.Created}");
                 return RedirectToPage("/Index");
-        }
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Exception caught!");
                 return RedirectToPage("/Index");
             }
-}
+        }
     }
 }
